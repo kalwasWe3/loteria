@@ -49,8 +49,32 @@ function generateBarCode(n) {
 
 
 
+var doc = new jsPDF(); 
+var specialElementHandlers = { 
+    '#editor': function (element, renderer) { 
+        return true; 
+    } 
+};
 
+//$('#submit').click(function () { 
+//    console.log("pdf")
+//    doc.fromHTML($('#content').html(), 15, 15, { 
+//        'width': 190, 
+//            'elementHandlers': specialElementHandlers 
+//    }); 
+//    doc.save('sample-page.pdf'); 
+//});
 
+  $("#submit").click(function() {
+
+    var doc = new jsPDF('p', 'pt', 'a4', true);
+
+    doc.fromHTML($('#renderMe').get(0), 15, 15, {
+      'width': 500
+    }, function (dispose) {
+    doc.save('promocode.pdf');
+    });
+  });
 
 
 
