@@ -110,5 +110,5 @@ app.use(expressip().getIpInfoMiddleware);
 app.get('/ip', function (req, res) {
   const ipInfo = req.ipInfo;
   var message = `Hey, you are browsing from ${ipInfo.city}, ${ipInfo.country} all ${ipInfo}`;
-  res.send(message);
+  res.(message);
 });

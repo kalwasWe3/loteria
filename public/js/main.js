@@ -11,8 +11,7 @@ async function getData(){
 async function getData(){
    var response = await fetch('/ip');
     console.log(response + "_res");
-//   var data = await response.json();
-//    await $("#numer").text("pozostało: " + (100 - data.length));
+
 
 }
 
