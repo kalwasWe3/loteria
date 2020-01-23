@@ -15,18 +15,17 @@
 </head>
 <body>
    <h1>Czytnik kodu</h1>
-    <input id="kod" type="text" placeholder="Tracking Code" >
-   <button id="btnKod">sprawdź kod</button>
+    <input id="kod" type="text" placeholder="Tracking Code" ><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label> 
+   <button id="btnKod" class="getlink">sprawdź kod</button>
    
-   <a href="index.html">home</a>
+ 
    
 <h3 id="response"></h3>
    
+     <a class="link" href="index.html">Generator</a>
+   
    <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
-    <script>
-
-    
-    </script>
+    <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"> </script>
 
    <script src="js/get.js"></script>
 </body>

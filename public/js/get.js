@@ -1,11 +1,35 @@
 
-
+//check insert code
 
 $("#btnKod").on('click', async  event => {
-    var kod = await $("#kod").val(); 
-    var data = await {kod:kod};
+    var kod =  $("#kod").val(); 
+    var data =  {kod:kod};
+    getData(data);
+});
+
+
+//check qr code
+function openQRCamera(node) {
+  var reader = new FileReader();
+  reader.onload = function() {
+    node.value = "";
+    qrcode.callback = function(res) {
+      if(res instanceof Error) {
+        alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+      } else {
+        var data =  {kod:res};
+        getData(data);
+      }
+    };
+    qrcode.decode(reader.result);
+  };
+  reader.readAsDataURL(node.files[0]);
+}
+
+
+async function getData(data){
     
-    var options = await {
+        var options = await {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -29,9 +53,7 @@ $("#btnKod").on('click', async  event => {
      }else{
             $("#response").text("kod nie istnieje");
     }
-});
-
-
-
+    
+}
 
 
