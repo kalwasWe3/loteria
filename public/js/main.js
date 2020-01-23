@@ -76,7 +76,7 @@ var specialElementHandlers = {
 
 async function getUserAsync() 
 {
-  let response = await fetch(`https://api.ipify.org/?format=json`);
+  let response = await fetch(`https://ipapi.co/json/`);
   let data = await response.json();
   return data;
 }
@@ -84,6 +84,9 @@ async function getUserAsync()
 getUserAsync().then(data => console.log(data)); 
 
 
+$.getJSON('https://ipapi.co/json/', function(data) {
+  console.log(JSON.stringify(data, null, 2) + "sec");
+});
 
 
 
