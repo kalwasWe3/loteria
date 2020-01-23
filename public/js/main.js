@@ -56,14 +56,7 @@ var specialElementHandlers = {
     } 
 };
 
-//$('#submit').click(function () { 
-//    console.log("pdf")
-//    doc.fromHTML($('#content').html(), 15, 15, { 
-//        'width': 190, 
-//            'elementHandlers': specialElementHandlers 
-//    }); 
-//    doc.save('sample-page.pdf'); 
-//});
+
 
   $("#submit").click(function() {
 
@@ -81,6 +74,14 @@ var specialElementHandlers = {
 
 
 
+async function getUserAsync() 
+{
+  let response = await fetch(`https://api.ipify.org/?format=json`);
+  let data = await response.json();
+  return data;
+}
+
+getUserAsync().then(data => console.log(data)); 
 
 
 
