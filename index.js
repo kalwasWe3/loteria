@@ -43,6 +43,23 @@ app.get('/numeber', function(request, response){
 
 // put
 app.post('/push', function(request, response){
+       var dataR = request.body;
+       var ipInBase;
+    
+ dayDb.find({ip : dataR.ip}, function(err, data){
+ 
+        if(err){
+            response.end();
+            return;
+        }
+        if(data && data.length){
+            response.json({
+                status: "ipUsed",
+                kode: "brak",
+            })
+        }else{
+    
+
     dayDb.find({}, function(err, data){
         if(err){
             response.end();
@@ -53,13 +70,12 @@ app.post('/push', function(request, response){
             response.json({
                 status: "faild",
                 kode: "brak",
-            }); 
+            })
         }else{
-            console.log(data.length)
-            var dataR = request.body;
+//            var dataR = request.body;
             var timestamp = Date.now();
             var newKode = generateCode();
-            var dataP = {kode: newKode, mail: dataR.mail, used: false};
+            var dataP = {kode: newKode, ip: dataR.ip, used: false};
             dataP.timestamp = timestamp;
             db.insert(dataP);
             dayDb.insert(dataP);
@@ -70,6 +86,9 @@ app.post('/push', function(request, response){
         }
     });
     
+ }
+ })   
+ 
 
 });
 
@@ -102,13 +121,3 @@ function generateCode(){
 
 
 
-const expressip = require('express-ip');
-const path = require('path');
-
-app.use(expressip().getIpInfoMiddleware);
-
-app.get('/ip', function (req, res) {
-  const ipInfo = req.ipInfo;
-  var message = `Hey, you are browsing from ${ipInfo.city}, ${ipInfo.country} all ${ipInfo}`;
-  res.(message);
-});

@@ -8,39 +8,43 @@ async function getData(){
 
 }
 
-async function getData(){
-   var response = await fetch('/ip');
-    console.log(response + "_res");
 
 
-}
 
 
-var mail = "patryk@we3studio.pl";
+//check ip
+var data;
 
-var data={mail:mail};
+$.getJSON('https://api.ipregistry.co/?key=wayqa2g5ssdkdf', function(nData) {
+    var ip = JSON.stringify(nData.ip);
+    data = {ip:ip};
+})
 
-var options = {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-};
 
 
 
 $("#buttonGet").on('click', async  event => {
+    console.log(data);
+    var options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    };
+
     const response = await fetch('/push', options);
     const dataJson = await response.json();
     const count = await dataJson.status;
      console.log(dataJson);
-    if(count !== "faild"){
+    if(count !== "faild" && count !== "ipUsed"){
         const  generatedKode = await dataJson.kode;
         await $("#kode").text(generatedKode);
         await generateBarCode(generatedKode); 
-    }else{
+    }else if(count !== "ipUsed"){
         $("#kode").text("już dzis probowało ponad 100 osob"); 
+    }else{
+        $("#kode").text("dziś już probowales");
     }
 });
 
